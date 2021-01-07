@@ -1,3 +1,4 @@
+import java.util.*;
 public class MyLinkedList{
 
  private int size;
@@ -28,7 +29,7 @@ public class MyLinkedList{
    Node n = new Node(value);
    if (size == 0) {
 	start = n;
-	end = n;
+	end = start;
    }
    else if (size == 1) {
 	end = n;
@@ -45,37 +46,43 @@ public class MyLinkedList{
  }
 
  public void add(int index, String value) {
-
-   Node current = start;
-   for (int i = 0; i < size; i++) {
-     if (i == index) {
-       Node n = new Node(value);
-       current.prev().setNext(n);
-       n.setPrev(current.prev());
-       n.setNext(current);
-       current.setPrev(n);
-     }
-     current = current.next();
+   if (index > size) {
+	   throw new IndexOutOfBoundsException("Index greater than size of linked list");
    }
+   if (index == 0) {
+	start.setValue(value);
+	end = start;
+   }
+   if (index == size) {
+	add(value);
+   }
+   else {
+	   Node current = start;
+   	for (int i = 0; i < size; i++) {
+   	  if (i == index) {
+   	    Node n = new Node(value);
+   	    current.prev().setNext(n);
+   	    n.setPrev(current.prev());
+   	    n.setNext(current);
+   	    current.setPrev(n);
+   	  }
+   	  current = current.next();
+   	}
+   }
+   size++;
 
  }
 
  public String get(int index) {
 
-	Node current = start;
-	for (int count = 0; count < index;count++) {
-		current = current.next();
-	}
+	Node current = getN(index);
 	return current.value();
 
  }
 
  public String set(int index, String value) {
 
-	 Node current = start;
-	 for (int count = 0; count < index; count++) {
-		current = current.next();
-	 }
+	 Node current = getN(index);
 	 String val = current.value();
 	 current.setValue(value);
 	 return val;
