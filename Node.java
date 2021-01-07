@@ -1,20 +1,23 @@
 public class Node{
+ 
  public Node(String value){/*create a constructor*/
    data = value;
  }
+
  private String data;
+
  private Node next,prev;
  //write get/set methods for all three instance variables.
 
- public String getData() {
+ public String value() {
    return data;
  }
 
- public Node getNext() {
+ public Node next() {
    return next;
  }
 
- public Node getPrev() {
+ public Node prev() {
    return prev;
  }
 
@@ -24,6 +27,10 @@ public class Node{
 
  public void setPrev(Node n) {
    prev = n;
+ }
+
+ public void setValue(String s) {
+   data = s;
  }
 
 }
