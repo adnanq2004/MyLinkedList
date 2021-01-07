@@ -4,13 +4,17 @@ public class MyLinkedList{
 
  private Node start,end;
 
- public MyLinkedList(int s, Node st, Node en){/*create a constructor*/
+ public MyLinkedList(){/*create a constructor*/
  
-   size = s;
+   /*size = s;
    start = st;
    end = en;
    start.setNext(end);
-   end.setPrev(start);
+   end.setPrev(start);*/
+
+	size = 0;
+	start = null;
+	end = null;
 
  }
 
@@ -21,10 +25,20 @@ public class MyLinkedList{
  }
 
  public boolean add(String value) {
-
    Node n = new Node(value);
-   end.setNext(n);
-   n.setPrev(end);
+   if (size == 0) {
+	start = n;
+	end = n;
+   }
+   else if (size == 1) {
+	end = n;
+	start.setNext(end);
+	end.setPrev(start);
+   }
+   else {
+   	end.setNext(n);
+  	n.setPrev(end);
+   }	
    size++;
    return true;
 
