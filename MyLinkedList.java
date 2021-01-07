@@ -94,9 +94,10 @@ public class MyLinkedList{
 	
 	Node current = start;
 	String val = "";
-	while (current.next().value() != null) {
+	while (current.next() != null) {
 		val += current.value();
 		val += ", ";
+		current = current.next();
 	}
 	val += end.value();
 	return val;
