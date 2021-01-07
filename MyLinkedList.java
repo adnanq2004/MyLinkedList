@@ -6,7 +6,7 @@ public class MyLinkedList{
  private Node start,end;
 
  public MyLinkedList(){/*create a constructor*/
- 
+
    /*size = s;
    start = st;
    end = en;
@@ -39,7 +39,7 @@ public class MyLinkedList{
    else {
    	end.setNext(n);
   	n.setPrev(end);
-   }	
+   }
    size++;
    return true;
 
@@ -86,12 +86,12 @@ public class MyLinkedList{
 	 String val = current.value();
 	 current.setValue(value);
 	 return val;
-	 
+
 
  }
 
  public String toString() {
-	
+
 	Node current = start;
 	String val = "";
 	while (current.next() != null) {
@@ -102,10 +102,10 @@ public class MyLinkedList{
 	val += end.value();
 	return val;
  }
- 
+
 
 	private Node getN(int n) {
-		
+
 		Node current = start;
 		for (int i = 0; i < n; i++) {
 			current = current.next();
@@ -113,6 +113,24 @@ public class MyLinkedList{
 		return current;
 
 	}
+
+  public String remove(int index) {
+
+    Node current = getN(index);
+    current.prev().setNext(current.next());
+    current.next().setPrev(current.prev());
+    return current.value();
+
+  }
+
+  public void extend(MyLinkedList other) {
+
+    end.setNext(other.start);
+    other.start.setPrev(this.end);
+    size += other.size();
+    other = new MyLinkedList();
+
+  }
 
  //Any helper method that returns a Node object MUST BE PRIVATE!
 }
