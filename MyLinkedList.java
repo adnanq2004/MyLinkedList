@@ -37,10 +37,18 @@ public class MyLinkedList{
 	end.setPrev(start);
    }
    else {
-   	end.setNext(n);
-  	n.setPrev(end);
+	   Node temp = new Node(end.value());
+	   Node pre = end.prev();
+	   pre.setNext(n);
+	   n.setPrev(pre);
+	   n.setNext(end);
+	   end.setPrev(n);
+	   end.setValue(n.value());
+	   n.setValue(temp.value());
+   	//end.setNext(n);
+  	//n.setPrev(end);
    }
-   size++;
+   this.size++;
    return true;
 
  }
@@ -103,6 +111,19 @@ public class MyLinkedList{
 	return val;
  }
 
+ /*public String toStringReverse() {
+	
+	Node current = end;
+	String val = "";
+	while (current.prev() != null) {
+		val += current.value();
+		val += ", ";
+		current = current.prev();
+	}
+	return val;
+
+ } */
+
 
 	private Node getN(int n) {
 
@@ -125,11 +146,23 @@ public class MyLinkedList{
 
   public void extend(MyLinkedList other) {
 
-    end.setNext(other.start);
-    other.start.setPrev(this.end);
+    Node temp = new Node(end.value());
+    Node firstend = new Node(end.value());
+    end.prev().setNext(firstend);
+    firstend.setPrev(end.prev());
+    firstend.setNext(other.start);
+    other.start.setPrev(firstend);
+    end.setPrev(other.end.prev());
+    other.end.prev().setPrev(end);
+    end.setValue(other.end.value());
+    other.end.setValue(temp.value());
+	  //end.setNext(other.start);
+    //other.start.setPrev(this.end);
     size += other.size();
-    other = new MyLinkedList();
-
+    MyLinkedList f = new MyLinkedList();
+	other = f;
+	//other.start.setValue(null);
+	//other.end.setValue(null);
   }
 
  //Any helper method that returns a Node object MUST BE PRIVATE!
