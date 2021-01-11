@@ -65,20 +65,14 @@ public class MyLinkedList{
 	add(value);
    }
    else {
-	   Node current = start;
-   	for (int i = 0; i < size; i++) {
-   	  if (i == index) {
+	   Node current = getN(index);
    	    Node n = new Node(value);
    	    current.prev().setNext(n);
    	    n.setPrev(current.prev());
    	    n.setNext(current);
    	    current.setPrev(n);
-   	  }
-   	  current = current.next();
    	}
-   }
    size++;
-
  }
 
  public String get(int index) {
@@ -99,20 +93,24 @@ public class MyLinkedList{
  }
 
  public String toString() {
-
+   if (size == 0) {
+     String val = "[]";
+     return val;
+   }
 	Node current = start;
-	String val = "";
+	String val = "[";
 	while (current.next() != null) {
 		val += current.value();
 		val += ", ";
 		current = current.next();
 	}
 	val += end.value();
-	return val;
+  val += "]";
+  return val;
  }
 
  /*public String toStringReverse() {
-	
+
 	Node current = end;
 	String val = "";
 	while (current.prev() != null) {
@@ -159,8 +157,10 @@ public class MyLinkedList{
 	  //end.setNext(other.start);
     //other.start.setPrev(this.end);
     size += other.size();
-    MyLinkedList f = new MyLinkedList();
-	other = f;
+    // MyLinkedList f = new MyLinkedList();
+    // other = f;
+  other.size = 0;
+  // other.start.setValue(null);
 	//other.start.setValue(null);
 	//other.end.setValue(null);
   }
