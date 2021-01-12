@@ -157,6 +157,8 @@ public class MyLinkedList{
 	  //end.setNext(other.start);
     //other.start.setPrev(this.end);
     size += other.size();
+    other.start = null;
+    other.end = null;
     // MyLinkedList f = new MyLinkedList();
     // other = f;
   other.size = 0;
